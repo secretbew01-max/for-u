@@ -1,0 +1,10 @@
+document.getElementById("overlay").addEventListener("click", function() {
+  const music = document.getElementById("music");
+
+  music.play(); // ✅ pasti berhasil karena user klik
+
+  this.style.opacity = "0";
+  setTimeout(() => this.style.display = "none", 500);
+
+  startContent(); // mulai animasi + lirik
+});
