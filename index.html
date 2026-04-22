@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>for pia 💙</title>
 
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #a8d8ff, #d6ecff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* card */
+.card {
+  background: rgba(255,255,255,0.6);
+  padding: 30px;
+  border-radius: 25px;
+  text-align: center;
+  max-width: 420px;
+}
+
+/* text */
+p {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: 0.7s;
+}
+
+/* button */
+button {
+  margin: 10px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.yes { background: #7ec8ff; color: white; }
+.no { background: #ccc; position: relative; }
+
+/* heart */
+#heart { display: none; margin-top: 15px; }
+
+/* lyrics */
+#lyrics {
+  margin: 15px 0;
+  font-size: 14px;
+  opacity: 0;
+  transition: 0.5s;
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUDIO -->
+<audio id="music" autoplay loop muted>
+  <source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+  <h2>hai👋</h2>
+
+  <div id="lyrics"></div>
+
+  <!-- TEXT KAMU (UTUH) -->
+  <p>sebenernya aku udah lama pengen ngomong ini, tapi selalu kepikiran macem-macem dan jadi ragu sama diri aku sendiri</p>
+  <p>jadi sebelumnya aku mau minta maaf dulu ya… maaf kalau selama ini aku bikin kamu nunggu tanpa kejelasan.</p>
+  <p>aku juga butuh waktu buat ngeyakinin diri aku sendiri</p>
+  <p>dan sekarang aku udah yakin</p>
+  <p>aku suka kamu. sesimpel itu, tapi juga seserius itu</p>
+  <p>aku gak tau gimana perasaan kamu ke aku, dan aku juga gak mau maksa. aku cuma pengen kamu tau apa yang sebenarnya aku rasain.</p>
+  <p>kalau ternyata kamu gak ngerasain hal yang sama, gak apa-apa kok. aku bakal tetap hargai kamu dan semua yang ada sekarang.</p>
+  <p>sekali lagi, maaf ya karena udah bikin kamu nunggu lama. dan makasih juga… karena tanpa kamu sadari, kamu udah jadi orang yang berarti buat aku.</p>
+  <p>apa pun jawaban kamu nanti, aku bakal terima.</p>
+  <p><b>aku suka sama kamu kak, mau ga jadi pacar aku?</b></p>
+
+  <button class="yes" onclick="accept()">terima</button>
+  <button class="no" onmouseover="moveBtn(this)">tolak</button>
+
+  <div id="heart">💙 makasih yaa !!</div>
+</div>
+
+<script>
+
+/* AUTO UNMUTE (trick autoplay) */
+window.addEventListener("load", () => {
+  const music = document.getElementById("music");
+
+  setTimeout(() => {
+    music.muted = false;
+    music.play().catch(() => {});
+  }, 1000);
+});
+
+/* fallback: kalau user sentuh layar */
+document.body.addEventListener("click", () => {
+  const music = document.getElementById("music");
+  music.muted = false;
+  music.play();
+});
+
+/* animasi teks */
+const texts = document.querySelectorAll("p");
+texts.forEach((el, i) => {
+  setTimeout(() => {
+    el.style.opacity = "1";
+    el.style.transform = "translateY(0)";
+  }, i * 900);
+});
+
+/* tombol tolak kabur */
+function moveBtn(btn) {
+  btn.style.position = "absolute";
+  btn.style.top = Math.random() * 80 + "%";
+  btn.style.left = Math.random() * 80 + "%";
+}
+
+/* klik terima */
+function accept() {
+  document.getElementById("heart").style.display = "block";
+}
+
+/* lirik */
+const lyrics = [
+  "aku ga tau sejak kapan...",
+  "perasaan ini berubah...",
+  "yang jelas sekarang...",
+  "aku cuma pengen kamu tau 💙"
+];
+
+let i = 0;
+function showLyrics() {
+  const el = document.getElementById("lyrics");
+
+  function next() {
+    if (i < lyrics.length) {
+      el.style.opacity = "1";
+      el.innerHTML = lyrics[i];
+      i++;
+      setTimeout(next, 3000);
+    }
+  }
+
+  next();
+}
+
+showLyrics();
+
+</script>
+
+</body>
+</html>
